@@ -91,7 +91,7 @@ router.post('/register', function(req, res, next) {
     }
 });
 
-/*passport.serializeUser(function(user, done) {
+passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
@@ -122,17 +122,16 @@ passport.use(new LocalStrategy(
         });
     }
 ));
-
 router.post('/login', passport.authenticate('local',{failureRedirect: '/users/login', failureFlash: 'Invalid username or password'}), function(req, res){
     console.log('Authentication Successful');
     req.flash('success', 'You are logged in');
     res.redirect('/');
 });
 
-router.get('/logout', function(req, res){
-    req.logout();
-    req.flash('success', 'You have logged out');
-    res.redirect('/users/login');
-});*/
+// router.get('/logout', function(req, res){
+//     req.logout();
+//     req.flash('success', 'You have logged out');
+//     res.redirect('/users/login');
+// });
 
 module.exports = router;
