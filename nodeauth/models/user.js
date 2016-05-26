@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-//var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 
 mongoose.connect('mongodb://localhost/nodeauth');
 
@@ -12,9 +12,9 @@ var UserSchema = mongoose.Schema({
         index: true
     },
     password: {
-        type: String
-//        required: true,
- //       bcrypt: true
+        type: String,
+        required: true,
+       bcrypt: true
     },
     email: {
         type: String
@@ -48,7 +48,7 @@ module.exports.getUserByUsername = function(username, callback){
 
 module.exports.createUser = function(newUser,callback){
     newUser.save(callback);
-    /*bcrypt.hash(newUser.password, 10, function(err, hash){
+    bcrypt.hash(newUser.password, 10, function(err, hash){
         if(err) throw err;
 
         // Set Hashed password
@@ -56,5 +56,5 @@ module.exports.createUser = function(newUser,callback){
 
         // Create User
         newUser.save(callback);
-    });*/
+    });
 }
