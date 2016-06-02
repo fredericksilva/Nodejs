@@ -5,6 +5,6 @@ var UserSchema = db.Schema({
 	email: {type: String, required: true},
 	passhash: {type: String, required: true},
 	created: {type: Date, default: Date.now}
-}):
+});
 
 module.exports = UserSchema;
