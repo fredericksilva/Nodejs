@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 			var sessionToken = jwt.sign(newuser._id, constants.JWT_SECRET, { expiresIn: 60*60*24});
 			res.json({
 				user: newuser,
-				message: 'success'
+				message: 'success',
 				sessionToken: sessionToken
 			});
 

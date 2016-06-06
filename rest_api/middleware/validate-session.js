@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-var user = require('.../models/user');
+var user = require('../models/user');
 var constants = require('../config/constants');
 
 module.exports = (req, res, next) => {
