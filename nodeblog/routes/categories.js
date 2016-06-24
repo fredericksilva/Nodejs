@@ -4,7 +4,7 @@ var mongo = require('mongodb');
 var db = require('monk')('localhost/nodeblog');
 
 
-/*router.get('/show/:category', function(req, res, next) {
+router.get('/show/:category', function(req, res, next) {
 
     var db = req.db;
     var posts = db.get('posts');
@@ -14,7 +14,7 @@ var db = require('monk')('localhost/nodeblog');
             "posts": posts
         });
     });
-});*/
+});
 
 router.get('/add', function(req, res, next) {
     res.render('addcategory', {
