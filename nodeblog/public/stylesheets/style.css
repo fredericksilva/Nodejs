@@ -91,6 +91,10 @@ a.more{
     width:100%;
 }
 
+.show img{
+    width:100%;
+}
+
 input, select, textarea{
     margin-bottom:15px;
 
