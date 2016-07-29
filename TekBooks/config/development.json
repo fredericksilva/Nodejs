@@ -9,14 +9,16 @@
     
     "view engines": {
         "dust": {
-            "module": "makara",
+            "module": "engine-munger",
             "renderer": {
                 "method": "dust",
                 "arguments": [
+                    { "cache": false },
                     {
-                        "cache": false,
-                        "helpers": "config:dust.helpers",
-                        "whitespace": true
+                        "views": "config:express.views",
+                        "view engine": "config:express.view engine",
+                        "specialization": "config:specialization",
+                        "i18n": "config:i18n"
                     }
                 ]
             }
@@ -38,9 +40,12 @@
                     {
                         
                         "template": {
-                            "module": "construx-dustjs",
+                            "module": "construx-dustjs-i18n",
                             "files": "/templates/**/*.js",
                             "base": "templates"
+                            
+                            ,"i18n": "config:i18n"
+                            
                         },
                         
                         

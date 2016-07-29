@@ -1,4 +1,4 @@
 TekBooks
 ===========
 
-Simple Shopping Cart
+Simple shopping cart

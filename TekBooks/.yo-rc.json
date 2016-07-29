@@ -2,9 +2,9 @@
   "generator-kraken": {
     "taskModule": "grunt",
     "lintModule": "eslint",
-    "description": "Simple Shopping Cart",
+    "description": "Simple shopping cart",
     "author": "Lekan Stephen",
-    "templateModule": "makara",
+    "templateModule": "dustjs",
     "i18n": "i18n",
     "componentPackager": "bower",
     "cssModule": "less",

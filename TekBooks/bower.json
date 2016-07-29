@@ -1,6 +1,6 @@
 {
   "name": "tekbooks",
-  "description": "Simple Shopping Cart",
+  "description": "Simple shopping cart",
   "main": "index.js",
   "author": "Lekan Stephen",
   "moduleType": [
@@ -16,6 +16,8 @@
     "tests"
   ],
   "dependencies": {
+    "dustjs-linkedin": "~2.6.1",
+    "dustjs-helpers": "dustjs-linkedin-helpers#~1.6.1",
     "requirejs": "^2.1.16"
   }
 }

@@ -1,0 +1,7 @@
+{>"layouts/master" /}
+{<title}
+  <p>Products</p>
+{/title}
+{<body}
+  <p>Products</p>
+{/body}
