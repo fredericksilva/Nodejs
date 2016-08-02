@@ -1,7 +1,25 @@
 {>"layouts/master" /}
-{<title}
-  <p>Products</p>
-{/title}
 {<body}
-  <p>Products</p>
+    <div class="row">
+
+    <div class="large-4 columns">
+        <img src='/img/node1.jpg'>
+    </div>
+
+    <div class="large-8 columns">
+        <h2>Professional Node.js</h2>
+        <ul class="bookinfo">
+            <li>Category: Node.js</li>
+            <li>Author: John Doe</li>
+            <li>Publisher: Some Publisher</li>
+        </ul>
+        <br/>
+        <div class="price"><span>$19.99</span></div>
+        <br/>
+        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+        <form method="post" action="/cart/{book._id}">
+            <input type="submit" class="button success" value="Add to Cart">
+            <input type="hidden" value="{_csrf}" name="_csrf">
+        </form>
+    </div>
 {/body}
