@@ -26,12 +26,12 @@ options = {
 app = module.exports = express();
 app.use(kraken(options));
 
-/*// Connect Flash
+// Connect Flash
 app.use(flash());
 app.use(function(req, res, next){
     res.locals.messages = require('express-messages')(req, res);
     next();
-});*/
+});
 
 app.on('start', function () {
     console.log('Application ready to serve requests.');
