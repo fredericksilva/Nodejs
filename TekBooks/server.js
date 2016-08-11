@@ -1,6 +1,6 @@
 'use strict';
 
-var app = require('./index');
+var app = require('./express');
 var http = require('http');
 
 

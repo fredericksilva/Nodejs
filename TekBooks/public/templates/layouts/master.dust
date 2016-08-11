@@ -46,7 +46,6 @@
                 </div>
             </div>
         </footer>
-
         <script data-main="/js/app" src="/components/requirejs/require.js"></script>
         <script src="/js/vendor/jquery.js"></script>
         <script src="/js/foundation.min.js"></script>

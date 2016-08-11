@@ -15,8 +15,6 @@ module.exports = function (router) {
                 console.log(err);
             }
 
-            console.log('books: ' + books);
-
             var model = {
                 books: books
             };
@@ -117,128 +115,128 @@ module.exports = function (router) {
         });
     });
 
-    // // Edit Book
-    // router.post('/books/edit/:id', function(req, res){
+    // Edit Book
+    router.post('/books/edit/:id', function(req, res){
 
-    //     var title =  req.body.title && req.body.title.trim();
-    //     var category = req.body.category && req.body.category.trim();
-    //     var author = req.body.author && req.body.author.trim();
-    //     var publisher = req.body.publisher && req.body.publisher.trim();
-    //     var price = req.body.price && req.body.price.trim();
-    //     var description = req.body.description && req.body.description.trim();
-    //     var cover = req.body.cover && req.body.cover.trim();
+        var title =  req.body.title && req.body.title.trim();
+        var category = req.body.category && req.body.category.trim();
+        var author = req.body.author && req.body.author.trim();
+        var publisher = req.body.publisher && req.body.publisher.trim();
+        var price = req.body.price && req.body.price.trim();
+        var description = req.body.description && req.body.description.trim();
+        var cover = req.body.cover && req.body.cover.trim();
 
-    //     Book.update({_id: req.params.id},{
-    //         title: title,
-    //         category: category,
-    //         author: author,
-    //         publisher: publisher,
-    //         price: price,
-    //         description: description,
-    //         cover: cover
-    //     }, function(err){
-    //         if(err){
-    //             console.log('update book error', err);
-    //         }
+        Book.update({_id: req.params.id},{
+            title: title,
+            category: category,
+            author: author,
+            publisher: publisher,
+            price: price,
+            description: description,
+            cover: cover
+        }, function(err){
+            if(err){
+                console.log('update book error', err);
+            }
 
-    //         req.flash('success', 'Book Updated');
-    //         res.location('/manage/books');
-    //         res.redirect('/manage/books');
-    //         });
-    // });
+            req.flash('success', 'Book Updated');
+            res.location('/manage/books');
+            res.redirect('/manage/books');
+            });
+    });
 
-    // // Delete Book
-    // router.delete('/books/delete/:id', function(req, res){
+    // Delete Book
+    router.delete('/books/delete/:id', function(req, res){
 
-    //     Book.remove({_id: req.params.id}, function(err){
-    //         if(err){
-    //             console.log('delete book error', err);
-    //         }
+        Book.remove({_id: req.params.id}, function(err){
+            if(err){
+                console.log('delete book error', err);
+            }
 
-    //         req.flash('success', 'Book Deleted');
-    //         res.location('/manage/books');
-    //         res.redirect('/manage/books');
-    //     });
-    // });
+            req.flash('success', 'Book Deleted');
+            res.location('/manage/books');
+            res.redirect('/manage/books');
+        });
+    });
 
-    // // Display category add Form
-    // router.get('/categories/add', function(req, res){
-    //     res.render('manage/categories/add');
-    // });
+    // Display category add Form
+    router.get('/categories/add', function(req, res){
+        res.render('manage/categories/add');
+    });
 
-    // // Add a new Category
-    // router.post('/categories', function(req, res){
-    //     var name = req.body.name && req.body.name.trim();
+    // Add a new Category
+    router.post('/categories', function(req, res){
+        var name = req.body.name && req.body.name.trim();
 
-    //     if (name == ''){
-    //         req.flash('error', 'Please fill out required field');
-    //         res.location('/manage/categories/add');
-    //         res.redirect('/manage/categories/add');
-    //     }
+        if (name == ''){
+            req.flash('error', 'Please fill out required field');
+            res.location('/manage/categories/add');
+            res.redirect('/manage/categories/add');
+        }
 
-    //     var newCategory = new Category({
-    //         name: name
-    //     });
+        var newCategory = new Category({
+            name: name
+        });
 
-    //     newCategory.save(function(err){
-    //         if(err){
-    //             console.log('save new category error', err);
-    //         }
+        newCategory.save(function(err){
+            if(err){
+                console.log('save new category error', err);
+            }
 
-    //         req.flash('success', 'Category Added');
-    //         res.location('/manage/categories');
-    //         res.redirect('/manage/categories');
-    //     });
-    // });
+            req.flash('success', 'Category Added');
+            res.location('/manage/categories');
+            res.redirect('/manage/categories');
+        });
+    });
 
-    // // Display Category Edit Form
-    // router.get('/categories/edit/:id', function(req, res){
-    //         Category.findOne({_id:req.params.id}, function(err, category){
-    //             if(err){
-    //                 console.log(err);
-    //             }
+    // Display Category Edit Form
+    router.get('/categories/edit/:id', function(req, res){
+            Category.findOne({_id:req.params.id}, function(err, category){
+                if(err){
+                    console.log(err);
+                }
 
-    //             var model = {
-    //                 category: category
-    //             };
+                var model = {
+                    category: category
+                };
 
-    //             res.render('manage/categories/edit', model);
-    //         });
-    //     });
-
-
-    // // Edit Book
-    // router.post('/categories/edit/:id', function(req, res){
-
-    //     var name =  req.body.name && req.body.name.trim();
-
-    //     Category.update({_id: req.params.id},{
-    //         name: name
-    //     }, function(err){
-    //         if(err){
-    //             console.log('update category error', err);
-    //         }
-
-    //         req.flash('success', 'Category Updated');
-    //         res.location('/manage/categories');
-    //         res.redirect('/manage/categories');
-    //     });
-    // });
+                res.render('manage/categories/edit', model);
+            });
+        });
 
 
-    // // Delete Category
-    // router.delete('/categories/delete/:id', function(req, res){
+    // Edit Category
+    router.post('/categories/edit/:id', function(req, res){
 
-    //     Category.remove({_id: req.params.id}, function(err){
-    //         if(err){
-    //             console.log('delete category error', err);
-    //         }
+        var name =  req.body.name && req.body.name.trim();
 
-    //         req.flash('success', 'Category Deleted');
-    //         res.location('/manage/categories');
-    //         res.redirect('/manage/categories');
-    //     });
-    // });
+        Category.update({_id: req.params.id},{
+            name: name
+        }, function(err){
+            if(err){
+                console.log('update category error', err);
+            }
+
+            req.flash('success', 'Category Updated');
+            res.location('/manage/categories');
+            res.redirect('/manage/categories');
+        });
+    });
+
+
+    // Delete Category
+    router.delete('/categories/delete/:id', function(req, res){
+
+        Category.remove({_id: req.params.id}, function(err){
+            if(err){
+                console.log('delete category error', err);
+            }
+
+            req.flash('success', 'Category Deleted');
+            res.location('/manage/categories');
+            res.redirect('/manage/categories');
+        });
+    });
 
       router.get('/categories', function (req, res) {
         res.render('manage/categories/index');        
