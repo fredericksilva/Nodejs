@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	section#portfolio
+		.container
+			.row
+				.col-lg-12.text-center
+					h2 Portfolio
+					hr.star-primary
+			.row
+			each row, i in rows
+				.col-sm-4.portfolio-item
+					a.portfolio-link(href='#portfolioModal#{i}', data-toggle='modal')
+						.caption
+							.caption-content
+								i.fa.fa-search-plus.fa-3x
+						img.img-responsive(src='img/portfolio/#{row.image}', alt='')
