@@ -50,6 +50,8 @@ app.use(session({
     resave: true
 }));
 
+app.use(flash());
+
 app.locals.moment = require('moment');
 app.use(function(req, res, next){
     res.locals.messages = require('express-messages')(req, res);
