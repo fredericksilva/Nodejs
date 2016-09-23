@@ -1,0 +1,38 @@
+doctype html
+html(lang='en')
+  head
+    title Portfolio
+    // Bootstrap Core CSS
+    link(href='/vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+    // Custom styles for this template
+    link(href='/stylesheets/dashboard.css', rel='stylesheet')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') Portfolio
+        #navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='/admin') Dashboard
+            li
+              a(href='/admin/new') Add Project
+            li
+              a(href='/') Visit Site
+        // /.nav-collapse
+      
+    .container(style="margin-top: 100px;")
+      //!= messages()
+      block content
+    
+    // Placed at the end of the document so the pages load faster
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    
+    script(src='vendor/bootstrap/js/bootstrap.min.js')
+    script(src='javascripts/dashboard.js')
+
