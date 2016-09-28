@@ -78,6 +78,14 @@ app.use(function(req, res, next){
   next();
 });
 
+//Makes the user object global in all view
+app.get('*', function(req, res, next){
+    res.locals.user = req.user || null;
+    if(req.user){
+      res.locals.usertype = req.user.type;
+    }
+    next();
+});
 
 app.use('/', routes);
 app.use('/users', users);
