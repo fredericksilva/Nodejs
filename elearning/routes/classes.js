@@ -16,17 +16,16 @@ router.get('/', function(req, res, next) {
 
 });
 
-
-// router.get('/:id/details', function(req, res, next) {
-//   Class.getClassById([req.params.id], function(err, classname){
-//     if(err){
-//       console.log(err);
-//       res.send(err);
-//     } else {
-//       res.render('classes/details', { "class": classname});
-//     }
-//   });
-// });
+router.get('/:id/details', function(req, res, next) {
+  Class.getClassById([req.params.id], function(err, classname){
+    if(err){
+      console.log(err);
+      res.send(err);
+    } else {
+      res.render('classes/details', { "class": classname});
+    }
+  });
+});
 
 
 // router.get('/:id/lessons', function(req, res, next) {
