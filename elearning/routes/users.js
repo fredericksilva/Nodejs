@@ -83,18 +83,18 @@ router.post('/signup', function(req, res, next) {
             username: username
         });
 
-        // var newInstructor = new Instructor({
-        //     first_name: first_name,
-        //     last_name: last_name,
-        //     address: [{
-        //         street_address: street_address,
-        //         city: city,
-        //         state: state,
-        //         zip: zip
-        //     }],
-        //     email: email,
-        //     username: username
-        // });
+        var newInstructor = new Instructor({
+            first_name: first_name,
+            last_name: last_name,
+            address: [{
+                street_address: street_address,
+                city: city,
+                state: state,
+                zip: zip
+            }],
+            email: email,
+            username: username
+        });
 
         if(type == 'student'){
             User.saveStudent(newUser, newStudent, function(err, user){
@@ -129,7 +129,7 @@ router.post('/login', passport.authenticate('local', {
           console.log('Authentication Successful');
           req.flash('success', 'You are now logged in');
           var usertype = req.user.type;
-          res.redirect('/');
+          res.redirect('/'+usertype+'s/classes');
 });
 
 passport.use(new LocalStrategy(
