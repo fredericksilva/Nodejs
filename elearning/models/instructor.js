@@ -31,10 +31,10 @@ var Instructor =  module.exports = mongoose.model('Instructor', instructorSchema
 
 
 // // Fetch Single Class
-// module.exports.getInstructorByUsername = function(username, callback){
-//     var query = {username: username};
-//     Instructor.findOne(query, callback);
-// };
+module.exports.getInstructorByUsername = function(username, callback){
+    var query = {username: username};
+    Instructor.findOne(query, callback);
+};
 
 // // Register Instructor for Class
 module.exports.register = function(info, callback){
