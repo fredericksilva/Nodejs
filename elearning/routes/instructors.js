@@ -35,27 +35,27 @@ router.post('/classes/register', function(req, res){
 });
 
 
-// router.get('/classes/:id/lessons/new', ensureAuthenticated, function(req, res, next) {
-//       res.render('instructors/newlesson', { "class_id": req.params.id});
-// });
+router.get('/classes/:id/lessons/new', ensureAuthenticated, function(req, res, next) {
+      res.render('instructors/newlesson', { "class_id": req.params.id});
+});
 
 
-// router.post('/classes/:id/lessons/new', ensureAuthenticated, function(req, res, next) {
+router.post('/classes/:id/lessons/new', ensureAuthenticated, function(req, res, next) {
 
-//       var info = [];
+      var info = [];
 
-//       info['class_id']        = req.params.id;
-//       info['lesson_number']   = req.body.lesson_number;
-//       info['lesson_title']    = req.body.lesson_title;
-//       info['lesson_body']     = req.body.lesson_body;
+      info['class_id']        = req.params.id;
+      info['lesson_number']   = req.body.lesson_number;
+      info['lesson_title']    = req.body.lesson_title;
+      info['lesson_body']     = req.body.lesson_body;
 
-//       Class.addLesson(info, function(err, lesson){
-//           console.log('Lesson Added');
-//       });
+      Class.addLesson(info, function(err, lesson){
+          console.log('Lesson Added');
+      });
 
-//       req.flash('succes', 'Lesson Added');
-//       res.redirect('/instructors/classes');
-// });
+      req.flash('succes', 'Lesson Added');
+      res.redirect('/instructors/classes');
+});
 
 
 
