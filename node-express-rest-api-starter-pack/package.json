@@ -1,0 +1,20 @@
+{
+  "name": "node-express-rest-api-starter-pack",
+  "version": "1.0.0",
+  "description": "Starter pack to build RESTful API with NodeJS + ExpressJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ThinhDev (thinhdev.com)",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "glob": "^7.1.0",
+    "md5": "^2.2.1",
+    "mongodb": "^2.2.10",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7"
+  }
+}
