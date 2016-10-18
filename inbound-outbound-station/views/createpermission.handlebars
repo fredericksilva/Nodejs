@@ -1,0 +1,30 @@
+<h4>Create / Edit Permission</h4>
+
+<form method="post" action="/admin/permissions/{{ permission.id }}">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" id="name" required placeholder="Permission Name" value="{{ permission.name }}">
+        </div>
+        <div class="form-group">
+            <label for="action">Action</label>
+            <input type="text" class="form-control" name="action" id="action" required placeholder="Action" value="{{ permission.action }}">
+        </div>
+        <div class="form-group">
+            <label for="is_active">Status</label>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="is_active" id="is_active" {{#compare permission.status '==' 'active' }}checked{{/compare}}> Active
+                </label>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="text-left">
+            <button type="submit" class="btn btn-primary">Save Permission</button>
+            <button type="reset" class="btn btn-danger">Clear</button>
+        </div>
+    </div>
+
+
+</form>

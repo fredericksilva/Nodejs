@@ -1,0 +1,39 @@
+<div class="row">
+
+    <div class="col-xs-12">
+        <h4> Batches / <span class="text-primary"> {{ batchNo }} </span></h4>
+    </div>
+
+    <div class="col-xs-12">
+
+        <div class="panel panel-default batch-details">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Batch Details</div>
+
+            <!-- List group -->
+            <ul class="list-group">
+                {{#each batch.items }}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-1"><input type="checkbox" class='chk_box' name="item_{{ product_id}}" value="{{ product_id}}"/></div>
+                            <div class="col-xs-1"><img src="{{ image }}" height="75px" width="auto" /></div>
+                            <div class="col-xs-4">
+                                <span class="text-primary"> {{ product_name }} </span>
+                                <p>SKU: {{ product_id }}</p>
+                            </div>
+                            <div class="col-xs-2"><span>N {{ unit_price }}</span></div>
+                            <div class="col-xs-2"><span><strong>qty</strong>: {{ qty }}</span></div>
+                            <div class="col-xs-2"><span class="label label-info">{{ tag }}</span></div>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <div class="col-xs-12 detail_view_button">
+            <div class="row text-center">
+                <input id="btnRelease" type="submit" class="btn btn-success disabled" value="Release Batch" />
+            </div>
+        </div>
+    </div>
+</div>

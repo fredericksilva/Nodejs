@@ -1,0 +1,26 @@
+{
+  "name": "inbound_outbound_station",
+  "description": "Consignment station for inbound and outbound operations",
+  "main": "server.js",
+  "authors": [
+    "Konga dev team"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Consignment",
+    "Inbound",
+    "Outbound"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "handlebars": "^4.0.5"
+  }
+}

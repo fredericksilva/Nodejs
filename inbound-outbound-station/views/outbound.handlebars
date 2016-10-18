@@ -1,0 +1,84 @@
+<div class="row">
+
+    <form action="" method="get">
+        <div class="col-lg-3">
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" value="{{ q }}" placeholder="Batch Number">
+                <span class="input-group-btn">
+                    <input class="btn btn-primary" type="submit" value="Search" />
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </form>
+
+    <div class="clearfix"></div>
+
+    <div class="col-xs-12">
+
+        <p class="text-center pagination_text">Showing records <strong>{{ pagination.start }}</strong> to <strong>{{ pagination.end }}</strong> of <strong>{{ pagination.total }}</strong> Batches</p>
+
+        <table class="table service table-hover tbl-user">
+            <thead>
+            <tr>
+                <th>Batch No</th>
+                <th>Store ID</th>
+                <th>Store Name</th>
+                <th>Warehouse</th>
+                <th>Contact Details</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each batches }}
+                <tr>
+                    <!--<th scope="row">1</th>-->
+                    <td> {{ batch_number }}</td>
+                    <td>{{ merchant_id }}</td>
+                    <td> {{ merchant_name }} </td>
+                    <td class="text-uppercase">{{ warehouse }}</td>
+                    <td> {{ merchant_contact }} </td>
+                    <td>
+                        <a href="/outbound/view/{{ batch_number }}" class="btn-link">Batch Details</a>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+
+
+        {{#if pagination.show }}
+            <div class="col-xs-12">
+                <div class="row text-center">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+
+                            <li {{#unless pagination.prev }}class="disabled"{{/unless}}>
+                                <a href="/outbound?page={{ pagination.first }}" aria-label="First">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    First
+                                </a>
+                            </li>
+                            <li {{#unless pagination.prev }}class="disabled"{{/unless}}>
+                                <a href="/outbound?page={{ pagination.prev }}" aria-label="Previous">
+                                    <span aria-hidden="true">&lsaquo;</span>
+                                    Prev
+                                </a>
+                            </li>
+
+                            <li {{#unless pagination.next }}class="disabled"{{/unless}}>
+                                <a href="/outbound?page={{ pagination.next }}" aria-label="Next">Next
+                                    <span aria-hidden="true">&rsaquo;</span>
+                                </a>
+                            </li>
+                            <li {{#unless pagination.next }}class="disabled"{{/unless}}>
+                                <a href="/outbound?page={{ pagination.last }}" aria-label="Last">Last
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</div>

@@ -1,0 +1,26 @@
+# Web-app specific override file. The "docker-compose up -d" command will, by default, find and run the
+# docker-compose.yml file and create those services.
+# However, to also create and run this service in the background (for API testing) you must run:
+#
+# docker-compose -f docker-compose.yml -f docker-compose.web_app.yml up -d
+web_app:
+    build: .
+    container_name: stockstation_web_app
+
+    # Expose the internal 8000 port, but do not specify host port mapping. Docker will map it as it pleases and
+    # prevent clashes to existing ports.
+    ports:
+        - 8000
+    links:
+        - mysql
+        - redis
+        - statsd
+
+    # Set the default environment variables when we run it via compose.
+    env_file:
+        - ./.env
+
+    # Map the exposed folder volumes to the directories within our repos.
+    volumes:
+        - .:/src
+        - ./docker_logs/stockstation:/var/log/applications/stockstation

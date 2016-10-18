@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h4>Create / Edit Users</h4>
+        <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS.</p>
+        <form method="post" action="/admin/users">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required value="{{#if data.firstname }}{{data.firstname}}{{/if}}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" required placeholder="Email" value="{{#if data.email }}{{data.email}}{{/if}}">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" required placeholder="Password">
+                    <p class="help-block">Password must contain at least 1 uppercase, 1 special and 1 numeric, and must be at least 8 characters</p>
+                </div>
+                <div class="form-group">
+                    <label for="retype_password">Retype password</label>
+                    <input type="password" name="retype_password" class="form-control" id="retype_password" required placeholder="Password">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" required placeholder="Last Name" value="{{#if data.lastname }}{{data.lastname}}{{/if}}">
+                </div>
+                <div class="form-group">
+                    <label for="warehouse">Warehouse</label>
+                    <select class="form-control" id="warehouse" name="warehouse" required>
+                        {{#each warehouses }}
+                            <option value="{{ id }}" {{#compare id '==' ../data.warehouse}}selected{{/compare}}>{{ capitalize name }}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="is_active">Status</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="is_active" id="is_active" {{#compare data.is_active '==' 'on'}}checked{{/compare}}> Active
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4>Roles</h4>
+                {{#each roles }}
+                    <div class="radio">
+                        <label><input type="radio" name="role" id="role_{{ id }}" value="{{ id }}" {{#compare id '==' ../data.role}}checked{{/compare}} required> {{ name }} </label>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="clearfix"></div>
+
+            <br />
+            <br />
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary">Save User</button>
+                <button type="reset" class="btn btn-danger">Clear</button>
+            </div>
+        </form>
+    </div>
+</div>

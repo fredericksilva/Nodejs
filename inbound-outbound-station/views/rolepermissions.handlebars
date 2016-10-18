@@ -1,0 +1,68 @@
+
+        <h4>
+            Role Permissions for {{role.name}}
+            <div class="pull-right">
+                <a href="/admin/roles/{{role.id}}/addpermissions" class="btn btn-success">
+                    <i class="glyphicon glyphicon-plus"></i> Add Permission
+                </a>
+            </div>
+
+            <div class="pull-right">
+                <form method="post" action="/admin/roles/{{ role.id }}/removepermissions" class="itemForm">
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-danger itemBtn">
+                            <i class="glyphicon glyphicon-minus"></i> Revoke Permission
+                        </a>
+                    </div>
+                    <input type="hidden" name="roleId" value="{{ role.id }}" >
+                    <input type="hidden" class="attribList" name="permissions" value="" >
+                </form>
+            </div>
+        </h4>
+
+
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        {{#if role.permissions }}
+            <table class="table table-hover tbl-permission ">
+                <thead>
+                <tr>
+                    <th><input type="checkbox" class="allTableItem"> </th>
+                    <th>Name</th>
+                    <th>Action</th>
+                    <th>Permission Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each role.permissions }}
+                    <tr>
+                        <td><input type="checkbox" data-id="{{ id }}" name="id" class="tableItem"></td>
+                        <td>{{ name }}</td>
+                        <td>{{ action }}</td>
+                        <td>
+                            {{#compare status '==' 'active' }}
+                                <span class="label label-primary text-capitalize">{{ status }}</span>
+                            {{else}}
+                                <span class="label label-danger text-capitalize">{{ status }}</span>
+                            {{/compare}}
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        {{else}}
+            <div class="alert alert-info"><i class="fa fa-info"></i>No assigned permission exist</div>
+        {{/if}}
+    </div>
+</div>
+
+
+
+<!-- Load jquery before the table-attrib-extract instead of waiting for the main contents jquery initialization -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/js/table-attrib-extract.js"></script>
+
+<link rel="stylesheet" href="/components/sweetalert/dist/sweetalert.css">

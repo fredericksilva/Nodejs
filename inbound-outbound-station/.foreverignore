@@ -1,0 +1,10 @@
+atlassian-ide-plugin.xml
+npm-debug.log
+cache.properties
+.DS_Store
+.idea/**
+.git/**
+docker_logs/**
+coverage/**
+node_modules/**
+bower_components/**

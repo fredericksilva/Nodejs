@@ -1,0 +1,62 @@
+{
+  "name": "inbound_outbound_station",
+  "version": "1.0.0",
+  "description": "Consignment station for inbound and outbound operations",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_PATH=. pm2 delete pm2.json && pm2 start pm2.json",
+    "stop": "pm2 stop pm2.json",
+    "remove": "pm2 delete pm2.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "NODE_PATH=. knex migrate:latest",
+    "seed": "NODE_PATH=. knex seed:run"
+  },
+  "keywords": [
+    "Consignment",
+    "Inbound",
+    "Outbound"
+  ],
+  "author": "Konga dev team",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "0.8.7",
+    "bluebird": "3.4.6",
+    "body-parser": "1.15.2",
+    "bookshelf": "0.10.0",
+    "connect-flash": "0.1.1",
+    "connect-redis": "3.1.0",
+    "consolidate": "0.14.1",
+    "cookie-parser": "1.4.3",
+    "dustjs-linkedin": "2.7.3",
+    "express": "4.14.0",
+    "express-handlebars": "3.0.0",
+    "express-messages": "1.0.1",
+    "express-session": "1.14.0",
+    "express-validator": "2.20.8",
+    "express3-handlebars": "0.5.2",
+    "handlebars": "4.0.5",
+    "handlebars-helpers": "0.7.5",
+    "http-status": "0.2.3",
+    "knex": "0.11.10",
+    "konga-accesstoken-provider": "0.0.1",
+    "konga-catalog": "2.1.1",
+    "konga-hermes": "1.0.1",
+    "konga-logging": "2.0.3",
+    "konga-metrics": "1.0.0",
+    "konga-oauth2": "4.4.1",
+    "konga-redis": "1.2.4",
+    "konga-service-locator": "1.2.1",
+    "mysql": "2.11.1",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "path": "0.12.7",
+    "querystring": "0.2.0",
+    "request": "2.74.0",
+    "requestretry": "1.12.0",
+    "uuid": "2.0.2"
+  },
+  "devDependencies": {
+    "jscs": "2.8.0",
+    "jshint": "2.9.2"
+  }
+}

@@ -1,0 +1,44 @@
+
+<h4>
+    Add Permissions to role {{role.name}}
+    <form method="post" action="/admin/roles/{{ role.id }}/addpermissions" class="itemForm">
+        <div class="pull-right">
+            <a href="#" class="btn btn-success itemBtn"><i class="glyphicon glyphicon-plus"></i> Add Permission</a>
+        </div>
+        <input type="hidden" name="roleId" value="{{ role.id }}" >
+        <input type="hidden" class="attribList" name="permissions" value="" >
+    </form>
+
+</h4>
+
+<div class="clearfix"></div>
+
+{{#if availablePermission }}
+    <table class="table table-hover tbl-permission">
+        <thead>
+        <tr>
+            <th><input type="checkbox" class="allTableItem"></th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each availablePermission }}
+            <tr>
+                <td><input type="checkbox" data-id="{{ id }}" name="id" class="tableItem"></td>
+                <td>{{ name }}</td>
+                <td>{{ action }}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <div class="alert alert-info"><i class="fa fa-info"></i>No un-assigned permission exist</div>
+{{/if}}
+
+<!-- Load jquery before the table-attrib-extract instead of waiting for the main contents jquery initialization -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/js/table-attrib-extract.js"></script>
+
+<link rel="stylesheet" href="/components/sweetalert/dist/sweetalert.css">
