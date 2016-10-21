@@ -4,33 +4,12 @@ var express = require('express');
 var routes = function(Book){
     var bookRouter = express.Router();
 
+    var bookController = require('../Controllers/bookController')(Book)
     bookRouter.route('/')
-        .post(function(req, res){
-            var book = new Book(req.body);
+        .post(bookController.post)
+        .get(bookController.get);
 
-
-            book.save();
-            res.status(201).send(book);
-
-        })
-        .get(function(req,res){
-
-            var query = {};
-
-            if(req.query.genre)
-            {
-                query.genre = req.query.genre;
-            }
-            Book.find(query, function(err,books){
-                if(err)
-                    res.status(500).send(err);
-                else
-                    res.json(books);
-            });
-        });
-    
-    //Implementing Middleware
-    bookRouter.use('/:bookId', function(req,res,next){ 
+    bookRouter.use('/:bookId', function(req,res,next){
         Book.findById(req.params.bookId, function(err,book){
             if(err)
                 res.status(500).send(err);
