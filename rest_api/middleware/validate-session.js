@@ -1,24 +1,25 @@
 var jwt = require('jsonwebtoken');
-var user = require('../models/user');
+var User = require('../models/user');
 var constants = require('../config/constants');
 
 module.exports = (req, res, next) => {
 	var sessionToken = req.headers.authorization;
 
-	if(!req.body.user && sessionToken) {
+	if(sessionToken) {
 		jwt.verify(sessionToken, constants.JWT_SECRET, (err, decodedId) => {
 			if (decodedId) {
-				User.findOne({_id: decodedId}).then((user) => {
+				console.log(decodedId.id);
+				User.findOne({_id: decodedId.id}).then((user) => {
 					req['user'] = user;
 					next();
 				}, (err) => {
-					res.send(401, 'not authorized');
+					res.send(401, 'Invalid User');
 				});
 			} else {
 				res.send(401, 'not authotized');
 			}
 		});	
 	} else {
-		next();
+		res.send(401, 'Auth token absent');
 	}
 };

@@ -6,7 +6,7 @@ var constants = require('../config/constants');
 
 
 router.post('/', (req, res) => {
-//user = { username: 'foo', email: 'blah@cheese.com', pwd" 'blah'}
+//user"" = { username: 'foo', email: 'blah@cheese.com', pwd" 'blah'}
 	var user = new User({
 		username: req.body.user.username,
 		email: req.body.user.email,
@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
 
 	user.save().then(
 		(newuser) => {
-			var sessionToken = jwt.sign(newuser._id, constants.JWT_SECRET, { expiresIn: 60*60*24});
+			var sessionToken = jwt.sign({id: newuser._id}, constants.JWT_SECRET, { expiresIn: 24*60*60 });
 			res.json({
 				user: newuser,
 				message: 'success',
@@ -31,5 +31,6 @@ router.post('/', (req, res) => {
 	);
 
 });
+
 
 module.exports = router;

@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
 			if (user) {
 				bcrypt.compare(req.body.user.pwd, user.passhash, (err, matches) =>{
 					if (matches) {
-						var sessionToken = jwt.sign(user._id, constants.JWT_SECRET, { expiresIn: 24*60*60 });
+						var sessionToken = jwt.sign({id: user._id}, constants.JWT_SECRET, { expiresIn: 24*60*60 });
 						res.json({
 							user: user,
 							message: 'successfully authed',
