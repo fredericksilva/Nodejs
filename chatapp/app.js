@@ -7,10 +7,7 @@ app.engine('html', require('hogan-express'));
 app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.route('/').get(function(req, res, next){
-	// res.send('<h1>Hello World!</h1>');
-	res.render('index', {title: 'Welcome To ChatAPP'});
-})
+require('./routes/routes.js')(express, app);
 
 app.listen(3000, function(){
 	console.log('ChatApp Working on Port 3000');
