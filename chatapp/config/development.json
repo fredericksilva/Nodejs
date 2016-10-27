@@ -1,0 +1,4 @@
+{
+	"dbURL":"mongodb://chatappuser:mychatapp@ds035177.mlab.com:35177/chatapp",
+	"sessionSecret":"LDKJFLJDKJKLJDLKJLKJIUWOIUWOIUW89798798"
+}
