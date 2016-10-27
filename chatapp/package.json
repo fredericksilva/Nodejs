@@ -9,7 +9,9 @@
   "author": "L3xy",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-session": "^1.14.1",
     "hogan-express": "^0.5.2"
   }
 }
