@@ -6,7 +6,7 @@ var express = require('express'),
 	config = require('./config/config.js'),
 	ConnectMongo = require('connect-mongo')(session),
 	mongoose = require('mongoose').connect(config.dbURL),
-	passport = require('password'),
+	passport = require('passport'),
 	FacebookStrategy = require('passport-facebook').Strategy
 
 app.set('views', path.join(__dirname, 'views'));
@@ -33,27 +33,12 @@ if(env === 'development'){
 	}))
 }
 
-// var userSchema = mongoose.Schema({
-// 	username:String,
-// 	password: String,
-// 	fullname: String
-// })
-
-// var Person = mongoose.model('users', userSchema);
-
-// var John = new Person({
-// 	username:'johndoe',
-// 	password:'pass',
-// 	fullname:'John Doe'
-// })
-
-// John.save(function(err){
-// 	console.log('Done!');
-// })
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./auth/passportAuth.js')(passport, FacebookStrategy, config, mongoose);
 
-require('./routes/routes.js')(express, app);
+require('./routes/routes.js')(express, app, passport);
 
 app.listen(3000, function(){
 	console.log('ChatApp Working on Port 3000');
