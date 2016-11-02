@@ -19,33 +19,33 @@
 			messages.emit('joinroom', {room:roomNum, user:userName, userPic:userPic})
 		})
 
-	// 	$(document).on('keyup', '.newmessage', function(e){
-	// 		if(e.which === 13 && $(this).val()!=''){
-	// 			messages.emit('newMessage', {
-	// 				room_number:roomNum,
-	// 				user:userName,
-	// 				userPic:userPic,
-	// 				message:$(this).val()
-	// 			})
-	// 			updateMessageFeed(userPic, $(this).val());
-	// 			$(this).val('');
-	// 		}
-	// 	})
+		$(document).on('keyup', '.newmessage', function(e){
+			if(e.which === 13 && $(this).val()!=''){
+				messages.emit('newMessage', {
+					room_number:roomNum,
+					user:userName,
+					userPic:userPic,
+					message:$(this).val()
+				})
+				updateMessageFeed(userPic, $(this).val());
+				$(this).val('');
+			}
+		})
 
-	// 	messages.on('messagefeed', function(data){
-	// 		var msgs = JSON.parse(data);
-	// 		updateMessageFeed(msgs.userPic, msgs.message);
-	// 	})
+		messages.on('messagefeed', function(data){
+			var msgs = JSON.parse(data);
+			updateMessageFeed(msgs.userPic, msgs.message);
+		})
 
-	// 	function updateMessageFeed(userPic, message){
-	// 		var str = '<li>';
-	// 			str += '<div class="msgbox">';
-	// 			str +=	'<div class="pic"><img src="' + userPic + '"></div>';
-	// 			str +=	'<div class="msg"><p>' + message + '</p></div>';
-	// 			str +=	'</div>';
-	// 			str += '</li>';
-	// 		$(str).hide().prependTo($('.messages')).slideDown(100);
-	// 	}
+		function updateMessageFeed(userPic, message){
+			var str = '<li>';
+				str += '<div class="msgbox">';
+				str +=	'<div class="pic"><img src="' + userPic + '"></div>';
+				str +=	'<div class="msg"><p>' + message + '</p></div>';
+				str +=	'</div>';
+				str += '</li>';
+			$(str).hide().prependTo($('.messages')).slideDown(100);
+		}
 
 	// 	messages.on('updateUsersList', function(data){
 	// 		var userlist = JSON.parse(data);
