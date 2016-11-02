@@ -40,7 +40,14 @@ require('./auth/passportAuth.js')(passport, FacebookStrategy, config, mongoose);
 
 require('./routes/routes.js')(express, app, passport);
 
-app.listen(3000, function(){
-	console.log('ChatApp Working on Port 3000');
-	console.log('Mode: ' + env);
+// app.listen(3000, function(){
+// 	console.log('ChatApp Working on Port 3000');
+// 	console.log('Mode: ' + env);
+
+app.set('port', 3000);
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+require('./socket/socket.js')(io);
+server.listen(app.get('port'), function(){
+	console.log('ChatCAT on Port : ' + app.get('port'));
 })
