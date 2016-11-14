@@ -1,7 +1,7 @@
 var express = require('express'),
 	path = require('path'),
-	config = require('./config/config.js')
-	// knox = require('knox'),
+	config = require('./config/config.js'),
+	knox = require('knox')
 	// fs = require('fs'),
 	// os = require('os'),
 	// formidable = require('formidable'),
@@ -19,11 +19,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', process.env.PORT || 3000);
 app.set('host', config.host);
 
-// var knoxClient = knox.createClient({
-// 	key: config.S3AccessKey,
-// 	secret: config.S3Secret,
-// 	bucket: config.S3Bucket
-// })
+var knoxClient = knox.createClient({
+	key: config.S3AccessKey,
+	secret: config.S3Secret,
+	bucket: config.S3Bucket
+})
 
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
