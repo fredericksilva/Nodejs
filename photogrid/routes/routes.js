@@ -1,4 +1,17 @@
-module.exports = function(express, app, formidable, fs, os, gm, knoxClient){
+module.exports = function(express, app, formidable, fs, os, gm, knoxClient, mongoose){
+
+var Socket;
+
+io.on('connection', function(socket){
+	Socket = socket;
+})
+
+var singleImage = new mongoose.Schema({
+	filename:String,
+	votes:Number
+})
+
+var singleImageModel = mongoose.model('singleImage', singleImage);
 
 var router = express.Router();
 
@@ -8,7 +21,6 @@ router.get('/', function(req, res, next){
 
 router.post('/upload', function(req, res, next){
 	//File upload
-
 	function generateFilename(filename){
 		var ext_regex = /(?:\.([^.]+))?$/;
 		var ext = ext_regex.exec(filename)[1];
@@ -46,24 +58,24 @@ router.post('/upload', function(req, res, next){
 						req.on('response', function(res){
 							if(res.statusCode == 200){
 								// This means that the file is in the S3 Bucket !
-					// 			var newImage = new singleImageModel({
-					// 				filename:fname,
-					// 				votes:0
-					// 			}).save();
+								var newImage = new singleImageModel({
+									filename:fname,
+									votes:0
+								}).save();
 
-					// 			Socket.emit('status', {'msg':'Saved !!', 'delay':3000});
-					// 			Socket.emit('doUpdate', {});
+								Socket.emit('status', {'msg':'Saved !!', 'delay':3000});
+								Socket.emit('doUpdate', {});
 
-					// 			// Delete the Local File
-					// 			fs.unlink(nfile, function(){
-					// 				console.log('Local File Deleted !');
-					// 			})
+								// Delete the Local File
+								fs.unlink(nfile, function(){
+									console.log('Local File Deleted !');
+								})
 
-					// 		}
-					// 	})
+							}
+						})
 
-					// 	req.end(buf);
-					// })
+						req.end(buf);
+					})
 				})
 			})
 		})

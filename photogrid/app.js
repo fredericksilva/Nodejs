@@ -5,8 +5,8 @@ var express = require('express'),
 	fs = require('fs'),
 	os = require('os'),
 	formidable = require('formidable'),
-	gm = require('gm')
-	// mongoose = require('mongoose').connect(config.dbURL)
+	gm = require('gm'),
+	mongoose = require('mongoose').connect(config.dbURL)
 
 
 var app = express();
@@ -28,7 +28,7 @@ var knoxClient = knox.createClient({
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-require('./routes/routes.js')(express, app, formidable, fs, os, gm, knoxClient);
+require('./routes/routes.js')(express, app, formidable, fs, os, gm, knoxClient, mongoose, io);
 
 server.listen(app.get('port'), function(){
 	console.log('PhotoGRID Running on port: ' + app.get('port'));
