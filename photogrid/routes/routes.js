@@ -1,4 +1,4 @@
-module.exports = function(express, app, formidable, fs, os, gm, knoxClient, mongoose){
+module.exports = function(express, app, formidable, fs, os, gm, knoxClient, mongoose, io){
 
 var Socket;
 
@@ -48,7 +48,7 @@ router.post('/upload', function(req, res, next){
 			fs.rename(tmpFile, nfile, function(){
 				// Resize the image and upload this file into the S3 bucket
 				gm(nfile).resize(300).write(nfile, function(){
-					Upload to the S3 Bucket
+					//Upload to the S3 Bucket
 					fs.readFile(nfile, function(err, buf){
 						var req = knoxClient.put(fname, {
 							'Content-Length':buf.length,
