@@ -1,4 +1,4 @@
-module.exports = function(express, app, formidable, fs, os){
+module.exports = function(express, app, formidable, fs, os, gm){
 
 var router = express.Router();
 
@@ -30,6 +30,42 @@ router.post('/upload', function(req, res, next){
 			nfile = os.tmpDir() + '/' + fname;
 			res.writeHead(200, {'Content-type':'text/plain'});
 			res.end();
+		})
+
+		newForm.on('end', function(){
+			fs.rename(tmpFile, nfile, function(){
+				// Resize the image and upload this file into the S3 bucket
+				gm(nfile).resize(300).write(nfile, function(){
+					// Upload to the S3 Bucket
+					// fs.readFile(nfile, function(err, buf){
+					// 	var req = knoxClient.put(fname, {
+					// 		'Content-Length':buf.length,
+					// 		'Content-Type':'image/jpeg'
+					// 	})
+
+					// 	req.on('response', function(res){
+					// 		if(res.statusCode == 200){
+					// 			// This means that the file is in the S3 Bucket !
+					// 			var newImage = new singleImageModel({
+					// 				filename:fname,
+					// 				votes:0
+					// 			}).save();
+
+					// 			Socket.emit('status', {'msg':'Saved !!', 'delay':3000});
+					// 			Socket.emit('doUpdate', {});
+
+					// 			// Delete the Local File
+					// 			fs.unlink(nfile, function(){
+					// 				console.log('Local File Deleted !');
+					// 			})
+
+					// 		}
+					// 	})
+
+					// 	req.end(buf);
+					// })
+				})
+			})
 		})
 })
 
