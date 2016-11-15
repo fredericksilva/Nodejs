@@ -1,4 +1,4 @@
-module.exports = function(express, app, formidable, fs, os, gm){
+module.exports = function(express, app, formidable, fs, os, gm, knoxClient){
 
 var router = express.Router();
 
@@ -36,16 +36,16 @@ router.post('/upload', function(req, res, next){
 			fs.rename(tmpFile, nfile, function(){
 				// Resize the image and upload this file into the S3 bucket
 				gm(nfile).resize(300).write(nfile, function(){
-					// Upload to the S3 Bucket
-					// fs.readFile(nfile, function(err, buf){
-					// 	var req = knoxClient.put(fname, {
-					// 		'Content-Length':buf.length,
-					// 		'Content-Type':'image/jpeg'
-					// 	})
+					Upload to the S3 Bucket
+					fs.readFile(nfile, function(err, buf){
+						var req = knoxClient.put(fname, {
+							'Content-Length':buf.length,
+							'Content-Type':'image/jpeg'
+						})
 
-					// 	req.on('response', function(res){
-					// 		if(res.statusCode == 200){
-					// 			// This means that the file is in the S3 Bucket !
+						req.on('response', function(res){
+							if(res.statusCode == 200){
+								// This means that the file is in the S3 Bucket !
 					// 			var newImage = new singleImageModel({
 					// 				filename:fname,
 					// 				votes:0
