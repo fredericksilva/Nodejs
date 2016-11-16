@@ -87,5 +87,11 @@ router.get('/getimages', function(req, res, next){
 	})
 })
 
+router.get('/voteup/:id', function(req, res, next){
+	singleImageModel.findByIdAndUpdate(req.params.id, {$inc:{votes:1}}, function(err, result){
+		res.send(200, {votes:result.votes});
+	})
+})
+
 app.use('/', router);
 }
