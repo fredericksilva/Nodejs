@@ -81,5 +81,11 @@ router.post('/upload', function(req, res, next){
 		})
 })
 
+router.get('/getimages', function(req, res, next){
+	singleImageModel.find({}, null, {sort:{votes:-1}}, function(err, result){
+		res.send(JSON.stringify(result));
+	})
+})
+
 app.use('/', router);
 }
