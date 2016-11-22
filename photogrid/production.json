@@ -1,7 +1,0 @@
-{
-	"host":"http://35.160.92.84",
-	"S3AccessKey":"AKIAJEUEKCFT5UMN6ILA",
-	"S3Secret":"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",
-	"S3Bucket":"gridphoto",
-	"dbURL":"mongodb://photogrid:myphotogrid@ds155097.mlab.com:55097/photogrid"
-}

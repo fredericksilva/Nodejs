@@ -8,6 +8,9 @@
   },
   "author": "L3xy",
   "license": "ISC",
+   "scripts": {
+    "start": "NODE_ENV=production node ./app"
+  },
   "dependencies": {
     "express": "^4.4.3",
     "formidable": "^1.0.15",

@@ -1,0 +1,9 @@
+{
+	"apps" : [{
+    // Application #1
+    "name"        : "photogrid",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }]
+}
