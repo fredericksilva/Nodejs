@@ -1,7 +1,9 @@
 var express = require('express'); //requiring the express library which must be installed
-var morgan = require('morgan'); //logging user requests
-var mongoose = require('mongoose');
+var morgan = require('morgan'); // for logging user requests
+var mongoose = require('mongoose'); //for processing db connection
+var bodyParser = require('body-parser'); //for parsing request data in whateve format
 
+var User = require('./models/user'); //importing the User schema in the user model
 var app = express(); //assigning app variable to the express module for reference to the method
 
 //connect to mongolab db
@@ -13,17 +15,33 @@ mongoose.connect('mongodb://root:arinola@ds163387.mlab.com:63387/ecommerce', fun
   }
 });
 
-//Middleware to invoke morgan
+//Middleware
 app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', function(req, res) {
-	var name = "L3xy";
-	res.json("My name is " + name);
+//Route to create user
+app.post('/create-user', function(req, res, next) {
+	var user = new User(); //create a new object of the User class above
+
+	user.profile.name = req.body.name;
+	user.password = req.body.password;
+	user.email = req.body.email;
+
+	user.save(function (err) {
+		if (err) next(err);
+		res.json('Successfully created a new user');
+	});
 });
 
-app.get('/catname', function(req, res) {
-	res.json('batman');
-});
+// app.get('/', function(req, res) {
+// 	var name = "L3xy";
+// 	res.json("My name is " + name);
+// });
+//
+// app.get('/catname', function(req, res) {
+// 	res.json('batman');
+// });
 
 app.listen(3000, function(err) {	// assigning port to the express library and  creating error validation optionally
 	if (err) throw err;
