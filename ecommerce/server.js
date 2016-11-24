@@ -2,6 +2,8 @@ var express = require('express'); //requiring the express library which must be 
 var morgan = require('morgan'); // for logging user requests
 var mongoose = require('mongoose'); //for processing db connection
 var bodyParser = require('body-parser'); //for parsing request data in whateve format
+var ejs = require('ejs');
+var engine = require('ejs-mate');
 
 var User = require('./models/user'); //importing the User schema in the user model
 var app = express(); //assigning app variable to the express module for reference to the method
@@ -19,6 +21,8 @@ mongoose.connect('mongodb://root:arinola@ds163387.mlab.com:63387/ecommerce', fun
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
 
 //Route to create user
 app.post('/create-user', function(req, res, next) {
@@ -29,9 +33,13 @@ app.post('/create-user', function(req, res, next) {
 	user.email = req.body.email;
 
 	user.save(function (err) {
-		if (err) next(err);
+		if (err) return next(err);
 		res.json('Successfully created a new user');
 	});
+});
+
+app.get('/', function(req, res) {
+	res.render('home');
 });
 
 // app.get('/', function(req, res) {
