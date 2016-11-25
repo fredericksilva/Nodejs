@@ -17,7 +17,7 @@ router.post('/signup', function(req, res, next) {
   User.findOne({ email: req.body.email }, function(err, existingUser) {
 
     if (existingUser) {
-    req.flash('errors', 'Account with that email address already exists');
+    req.flash('errors', 'Account with that email address exists already ');
       return res.redirect('/signup');
     } else {
       user.save(function(err, user) {
@@ -29,7 +29,5 @@ router.post('/signup', function(req, res, next) {
     }
   });
 });
-
-
 
 module.exports = router;

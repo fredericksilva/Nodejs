@@ -49,6 +49,6 @@ app.set('port', 3000);
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 require('./socket/socket.js')(io, rooms);
-server.listen(app.get('port'), function(){
-	console.log('ChatCAT on Port : ' + app.get('port'));
+server.listen((process.env.PORT || 3000), function(){
+	console.log('ChatAPP on Port : ' + app.get('port'));
 })

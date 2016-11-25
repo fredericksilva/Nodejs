@@ -8,6 +8,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('express-flash');
 
+
 var User = require('./models/user'); //importing the User schema in the user model
 var app = express(); //assigning app variable to the express module for reference to the method
 
