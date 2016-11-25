@@ -25,32 +25,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
-//Route to create user
-app.post('/create-user', function(req, res, next) {
-	var user = new User(); //create a new object of the User class above
+var mainRoutes = require('./routes/main');
+var userRoutes = require('./routes/user');
 
-	user.profile.name = req.body.name;
-	user.password = req.body.password;
-	user.email = req.body.email;
+app.use(mainRoutes);
+app.use(userRoutes);
 
-	user.save(function (err) {
-		if (err) return next(err);
-		res.json('Successfully created a new user');
-	});
-});
-
-app.get('/', function(req, res) {
-	res.render('main/home');
-});
-
-// app.get('/', function(req, res) {
-// 	var name = "L3xy";
-// 	res.json("My name is " + name);
-// });
-//
-// app.get('/catname', function(req, res) {
-// 	res.json('batman');
-// });
 
 app.listen(3000, function(err) {	// assigning port to the express library and  creating error validation optionally
 	if (err) throw err;
