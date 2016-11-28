@@ -7,9 +7,12 @@ var engine = require('ejs-mate');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('express-flash');
+var MongoStore = require('connect-mongo/es5')(session); //MongoStore library depend on express session
+var passport = require('passport');
 
 var secret = require('./config/secret'); //importing the scret file in the config folder
 var User = require('./models/user'); //importing the User schema in the user model
+
 var app = express(); //assigning app variable to the express module for reference to the method
 
 //connect to mongolab db
@@ -31,8 +34,11 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: secret.secretKey,
+  store: new MongoStore({ url: secret.database, autoReconnect: true})
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
