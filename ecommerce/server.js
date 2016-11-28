@@ -8,12 +8,12 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('express-flash');
 
-
+var secret = require('./config/secret'); //importing the scret file in the config folder
 var User = require('./models/user'); //importing the User schema in the user model
 var app = express(); //assigning app variable to the express module for reference to the method
 
 //connect to mongolab db
-mongoose.connect('mongodb://root:arinola@ds163387.mlab.com:63387/ecommerce', function(err) {
+mongoose.connect(secret.database, function(err) {   //reference the secret config key
   if (err) {
     console.log(err);
   } else {
@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(session({
   resave: true,
   saveUninitialized: true,
-  secret: "L3xy",
+  secret: secret.secretKey,
 }));
 app.use(flash());
 
@@ -44,7 +44,7 @@ app.use(mainRoutes);
 app.use(userRoutes);
 
 
-app.listen(3000, function(err) {	// assigning port to the express library and  creating error validation optionally
+app.listen(secret.port, function(err) {	// assigning port to the express library and  creating error validation optionally
 	if (err) throw err;
-	console.log("Server is running on port 3000");
+	console.log("Server is running on port " + secret.port);
 });
