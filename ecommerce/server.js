@@ -39,7 +39,7 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next) {
+app.use(function(req, res, next) {  //making the user object available to all routes
   res.locals.user = req.user;
   next();
 });
