@@ -46,11 +46,16 @@ router.post('/signup', function(req, res, next) {
       user.save(function(err, user) {
         if (err) return next(err);
 
-          res.redirect('/');
+          res.redirect('/profile');
 
       });
     }
   });
+});
+
+router.get('/logout', function(req, res, next) {
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = router;
