@@ -49,9 +49,11 @@ app.set('view engine', 'ejs');
 
 var mainRoutes = require('./routes/main');
 var userRoutes = require('./routes/user');
+var adminRoutes = require('./routes/admin');
 
 app.use(mainRoutes);
 app.use(userRoutes);
+app.use(adminRoutes);
 
 
 app.listen(secret.port, function(err) {	// assigning port to the express library and  creating error validation optionally
