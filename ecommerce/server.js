@@ -12,6 +12,7 @@ var passport = require('passport');
 
 var secret = require('./config/secret'); //importing the scret file in the config folder
 var User = require('./models/user'); //importing the User schema in the user model
+var Category = require('./models/category'); //importing the Category schema in the category model
 
 var app = express(); //assigning app variable to the express module for reference to the method
 
@@ -42,6 +43,15 @@ app.use(passport.session());
 app.use(function(req, res, next) {  //making the user object available to all routes
   res.locals.user = req.user;
   next();
+});
+
+// middleware to find all the categories and attache to a variable
+app.use(function(req, res, next) {
+  Category.find({}, function(err, categories) {
+    if (err) return next(err);
+    res.locals.categories = categories;
+    next();
+  });
 });
 
 app.engine('ejs', engine);
