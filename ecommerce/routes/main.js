@@ -1,6 +1,33 @@
 var router = require('express').Router();
 var Product = require('../models/product');
 
+Product.createMapping(function(err, mapping) {  //map the product db to elastic search relica
+  if (err) {
+    console.log("error creating mapping");
+    console.log(err);
+  } else {
+    console.log("Mapping created");
+    console.log(mapping);
+  }
+});
+
+//stream the data from mongodb product to elasticsearch product db
+var stream = Product.synchronize();
+var count = 0;
+
+stream.on('data', function() {    //count the number of document
+  count++;
+});
+
+stream.on('close', function() {   //output the number of documents
+  console.log("Indexed " + count + " documents");
+});
+
+stream.on('error', function(err) {
+  console.log(err);
+});
+
+//route to homepage
 router.get('/', function(req, res) {
   res.render('main/home');
 });
