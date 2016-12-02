@@ -8,6 +8,7 @@ Product.createMapping(function(err, mapping) {  //map the product db to elastic 
   } else {
     console.log("Mapping created");
     console.log(mapping);
+
   }
 });
 
@@ -25,6 +26,29 @@ stream.on('close', function() {   //output the number of documents
 
 stream.on('error', function(err) {
   console.log(err);
+});
+
+//search routes
+router.post('/search', function(req, res, next) {
+  res.redirect('/search?q=' + req.body.q);
+});
+
+router.get('/search', function(req, res, next) {
+  if (req.query.q) {
+    Product.search({
+      query_string: { query: req.query.q}
+    }, function(err, results) {
+      results:
+      if (err) return next(err);
+      var data = results.hits.hits.map(function(hit) {
+        return hit;
+      });
+      res.render('main/search-result', {
+        query: req.query.q,
+        data: data          //data is the object sent to the form
+      });
+    });
+  }
 });
 
 //route to homepage
