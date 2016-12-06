@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var mongoosastic = require('mongoosastic');
+var mexp = require('mongoose-elasticsearch-xp');
 var Schema = mongoose.Schema;
 
 var ProductSchema = new Schema({
@@ -9,10 +9,6 @@ var ProductSchema = new Schema({
   image: String
 });
 
-ProductSchema.plugin(mongoosastic, {
-  hosts: [
-    'localhost:9200'
-  ]
-});
+ProductSchema.plugin(mexp);
 
 module.exports = mongoose.model('Product', ProductSchema);
