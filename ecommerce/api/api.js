@@ -19,7 +19,7 @@ router.get('/categories', function(req, res) {
 
 //Search API
 router.post('/search', function(req, res, next) {
-  console.log(req.body.search_term);
+  console.log(req.body.search_term);    //log the results at the console
   Product.esSearch({
     query_string: { query: req.body.search_term }
   }, function(err, results) {
