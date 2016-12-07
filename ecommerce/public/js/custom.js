@@ -16,24 +16,21 @@ $(function() {  //indicate jQuery
           return hit;
         });
 
-        console.log(products);
+        $('#searchResults').empty();
+        for (var i = 0; i < products.length; i++) {
+          var html = "";
+          html += '<div class="col-md-4">';
+          html += '<a href="/product/' + products[i]._id + '">';
+          html += '<div class="thumbnail">';
+          html += '<img src="' +  products[i]._source.image + '">';
+          html += '<div class="caption">';
+          html += '<h3>' + products[i]._source.name  + '</h3>';
+          html += '<p>' +  products[i]._source.category.name  + '</h3>'
+          html += '<p>$' +  products[i]._source.price  + '</p>';
+          html += '</div></div></a></div>';
 
-
-        // $('#searchResults').empty();
-        // for (var i = 0; i < data.length; i++) {
-        //   var html = "";
-        //   html += '<div class="col-md-4">';
-        //   html += '<a href="/product/' + data[i]._source._id + '">';
-        //   html += '<div class="thumbnail">';
-        //   html += '<img src="' +  data[i]._source.image + '">';
-        //   html += '<div class="caption">';
-        //   html += '<h3>' + data[i]._source.name  + '</h3>';
-        //   html += '<p>' +  data[i]._source.category.name  + '</h3>'
-        //   html += '<p>$' +  data[i]._source.price  + '</p>';
-        //   html += '</div></div></a></div>';
-        //
-        //   $('#searchResults').append(html);
-        // }
+          $('#searchResults').append(html);
+        }
 
       },
 
