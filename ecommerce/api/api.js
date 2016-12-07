@@ -5,7 +5,6 @@ var Category = require('../models/category');
 var User = require('../models/user');
 var Product = require('../models/product');
 
-
 router.get('/users', function(req, res) {
   User.find({}, function(err, users) {
     res.json(users);
@@ -18,15 +17,16 @@ router.get('/categories', function(req, res) {
   })
 })
 
-// router.post('/search', function(req, res, next) {
-//   console.log(req.body.search_term);
-//   Product.search({
-//     query_string: { query: req.body.search_term }
-//   }, function(err, results) {
-//     if (err) return next(err);
-//     res.json(results);
-//   });
-// });
+//Search API
+router.post('/search', function(req, res, next) {
+  console.log(req.body.search_term);
+  Product.esSearch({
+    query_string: { query: req.body.search_term }
+  }, function(err, results) {
+    if (err) return next(err);
+    res.json(results);
+  });
+});
 
 
 router.get('/:name', function(req, res, next) {
