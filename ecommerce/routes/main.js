@@ -43,10 +43,28 @@ Product
     console.log('end.');
   });
 
-  //search routes to post the string
-  router.post('/search', function(req, res, next) {
-    res.redirect('/search?q=' + req.body.q);
+//route to add product to cart
+router.post('/product/:product_id', function(req, res, next) {
+  Cart.findOne({ owner: req.user._id }, function(err, cart) {   //find the owner of the cart
+    cart.items.push({
+      item: req.body.product_id,
+      price: parseFloat(req.body.priceValue),
+      quantity: parseInt(req.body.quantity)
+    });
+
+    cart.total = (cart.total + parseFloat(req.body.priceValue)).toFixed(2);
+
+    cart.save(function(err) {
+      if (err) return next(err);
+      return res.redirect('/cart');
+    });
   });
+});
+
+//search routes to post the string
+router.post('/search', function(req, res, next) {
+  res.redirect('/search?q=' + req.body.q);
+});
 
 //search routes to get the search query result
 router.get('/search', function(req, res, next) {
@@ -69,7 +87,7 @@ router.get('/search', function(req, res, next) {
 
 //route to homepage
 router.get('/', function(req, res, next) {
-  
+
   if (req.user) {
     paginate(req, res, next); //calling the paginate function above
  } else {
