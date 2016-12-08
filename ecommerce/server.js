@@ -14,6 +14,8 @@ var secret = require('./config/secret'); //importing the scret file in the confi
 var User = require('./models/user'); //importing the User schema in the user model
 var Category = require('./models/category'); //importing the Category schema in the category model
 
+var cartLength = require('./middlewares/middlewares');
+
 var app = express(); //assigning app variable to the express module for reference to the method
 
 //connect to mongolab db
@@ -45,6 +47,7 @@ app.use(function(req, res, next) {  //making the user object available to all ro
   next();
 });
 
+app.use(cartLength);
 // middleware to find all the categories and attache to a variable
 app.use(function(req, res, next) {
   Category.find({}, function(err, categories) {
