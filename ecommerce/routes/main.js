@@ -1,6 +1,8 @@
 var router = require('express').Router();
 var User = require('../models/user');
 var Product = require('../models/product');
+var Cart = require('../models/cart');
+
 
 function paginate(req, res, next) {
 
