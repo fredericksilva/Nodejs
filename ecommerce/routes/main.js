@@ -53,7 +53,7 @@ router.get('/cart', function(req, res, next) {
       if (err) return next(err);
       res.render('main/cart', {
         foundCart: foundCart,
-        message: req.flash('remove')
+        message: req.flash('remove') //add msg
       });
     });
 });
@@ -72,6 +72,20 @@ router.post('/product/:product_id', function(req, res, next) {
     cart.save(function(err) {
       if (err) return next(err);
       return res.redirect('/cart');
+    });
+  });
+});
+
+//remove route
+router.post('/remove', function(req, res, next) {
+  Cart.findOne({ owner: req.user._id }, function(err, foundCart) {
+    foundCart.items.pull(String(req.body.item));
+
+    foundCart.total = (foundCart.total - parseFloat(req.body.price)).toFixed(2);
+    foundCart.save(function(err, found) {
+      if (err) return next(err);
+      req.flash('remove', 'Successfully removed');
+      res.redirect('/cart');
     });
   });
 });
