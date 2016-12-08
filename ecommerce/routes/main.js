@@ -43,6 +43,19 @@ Product
     console.log('end.');
   });
 
+router.get('/cart', function(req, res, next) {
+  Cart
+    .findOne({ owner: req.user._id })
+    .populate('items.item')
+    .exec(function(err, foundCart) {
+      if (err) return next(err);
+      res.render('main/cart', {
+        foundCart: foundCart,
+        message: req.flash('remove')
+      });
+    });
+});
+
 //route to add product to cart
 router.post('/product/:product_id', function(req, res, next) {
   Cart.findOne({ owner: req.user._id }, function(err, cart) {   //find the owner of the cart
