@@ -3,6 +3,7 @@ var User = require('../models/user');
 var Product = require('../models/product');
 var Cart = require('../models/cart');
 
+var stripe = require('stripe') ('sk_test_XLFA6HPMji6FlwL1KGLtUKVO');
 
 function paginate(req, res, next) {
 
@@ -153,6 +154,24 @@ router.get('/product/:id', function(req, res, next) {
       product: product          //product is theh object that feed the form
     });
   });
+});
+
+//Payment route
+router.post('/payment', function(req, res, next) {
+
+  var stripeToken = req.body.stripeToken; //get the stripe tken from the client
+  var currentCharges = Math.round(req.body.stripeMoney * 100);  //convert to cents by stripes rule
+  stripe.customers.create({
+    source: stripeToken,
+  }).then(function(customer) {      //use stripe function to create a customer
+    return stripe.charges.create({
+      amount: currentCharges,
+      currency: 'usd',
+      customer: customer.id
+    });
+  });
+
+
 });
 
 
