@@ -89,7 +89,8 @@
                           </div>
                         </div>
                         <div class="panel-body">
-                          <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
+                          <form role="form" id="payment-form" method="POST" action="/payment">
+                            <input type="hidden" name="stripeMoney" value="<%= foundCart.total %>">
                             <div class="row">
                               <div class="col-xs-12">
                                 <div class="form-group">
@@ -139,7 +140,7 @@
 
                             <div class="row">
                               <div class="col-xs-12">
-                                <button class="subscribe btn btn-success btn-lg btn-block" type="button">Make Payment</button>
+                                <button class="subscribe btn btn-success btn-lg btn-block" type="button">Pay: $(<%= foundCart.total %>)</button>
                               </div>
                             </div>
                             <div class="row" style="display:none;">
