@@ -168,6 +168,8 @@ router.post('/payment', function(req, res, next) {
       amount: currentCharges,
       currency: 'usd',
       customer: customer.id
+    }, function(err, currentCharges) {
+      console.log(err);
     });
   });
 
