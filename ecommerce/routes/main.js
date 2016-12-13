@@ -3,6 +3,8 @@ var User = require('../models/user');
 var Product = require('../models/product');
 var Cart = require('../models/cart');
 
+var async = require('async');
+
 var stripe = require('stripe') ('sk_test_XLFA6HPMji6FlwL1KGLtUKVO');
 
 function paginate(req, res, next) {
@@ -171,9 +173,39 @@ router.post('/payment', function(req, res, next) {
     }, function(err, currentCharges) {
       console.log(err);
     });
-  });
+  }).then(function(charge) {
+    async.waterfall([
+      function(callback) {
+        Cart.findOne({ owner: req.user._id }, function(err, cart) {
+          callback(err, cart);  //Search the cart owner and pass it to the next function with the callback
+        });
+      },
+      function(cart, callback) {
+        User.findOne({ _id: req.user._id }, function(err, user) { //Search for the login user
+          if (user) {
+            for (var i = 0; i < cart.items.length; i++) { //if user exist, loop through the cart item and price and push into history
+              user.history.push({
+                item: cart.items[i].item,
+                paid: cart.items[i].price
+              });
+            }
 
-  res.redirect('/profile');
+            user.save(function(err, user) {
+              if (err) return next(err);  //If theres error, return a callback with an error
+              callback(err, user);    //Pass the user object to the next funtion
+            });
+          }
+        });
+      },
+      function(user) {
+        Cart.update({ owner: user._id }, { $set: { items: [], total: 0 }}, function(err, updated) { //empty cart
+          if (updated) {
+            res.redirect('/profile');
+          }
+        });
+      }
+    ]);
+  });
 
 
 });
