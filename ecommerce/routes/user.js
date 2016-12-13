@@ -17,13 +17,15 @@ router.post('/login', passport.authenticate('local-login', {
   failureFlash: true
 }));
 
-router.get('/profile', function(req, res) {
-  User.findOne({ _id: req.user._id }, function(err, user) {
-   if (err) return next(err);
+router.get('/profile', passportConf.isAuthenticated, function(req, res, next) {
+  User
+    .findOne({ _id: req.user._id })
+    .populate('history.item')
+    .exec(function(err, foundUser) {
+      if (err) return next(err);
 
-   res.render('accounts/profile', { user: user });
-
- });
+      res.render('accounts/profile', { user: foundUser });
+    });
 });
 
 router.get('/signup', function(req, res, next) {
