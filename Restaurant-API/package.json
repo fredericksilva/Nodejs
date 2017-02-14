@@ -1,0 +1,44 @@
+{
+  "name": "restaurant_api",
+  "version": "0.0.1",
+  "description": "Restaurant RESTful API",
+  "main": "src",
+  "scripts": {
+    "dev": "SET NODE_ENV=development & nodemon -w src",
+    "start": "SET NODE_ENV=production & pm2 start index",
+    "lint": "eslint src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olexy/Nodejs.git"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-console": 0,
+      "no-unused-vars": 1
+    }
+  },
+  "author": "L3xy <h.lekan@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olexy/Nodejs/issues"
+  },
+  "homepage": "https://github.com/olexy/Nodejs#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "mongoose": "^4.8.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "nodemon": "^1.11.0"
+  }
+}
