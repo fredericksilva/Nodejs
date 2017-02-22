@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/config/index.js"],"names":[],"mappings":";;;;;kBAAe;AACb,UAAQ,IADK;AAEb,cAAY;AAFC,C","file":"index.js","sourcesContent":["export default {\r\n  \"port\": 3005,\r\n  \"mongoUrl\": \"mongodb://localhost:27017/restaurant-api\"\r\n}\r\n"]}
+{"version":3,"sources":["../../src/config/index.js"],"names":[],"mappings":";;;;;kBAAe;AACb,UAAQ,IADK;AAEb,cAAY;AAFC,C","file":"index.js","sourcesContent":["export default {\r\n  \"port\": 3005,\r\n  \"mongoUrl\": \"mongodb://localhost:27017/foodtruck-api\"\r\n}\r\n"]}

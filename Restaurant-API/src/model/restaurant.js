@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 let Schema = mongoose.Schema;
 
-let restaurantSchema = new Schema({
+let foodtruckSchema = new Schema({
   name: String
 });
 
-module.exports = mongoose.model('Restaurant', restaurantSchema);
+module.exports = mongoose.model('FoodTruck', foodtruckSchema);
