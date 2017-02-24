@@ -3,6 +3,8 @@ import { Router } from 'express';
 import FoodTruck from '../model/foodtruck';  //create FoodTruck class from the model
 import Review from '../model/review';
 
+import { authenticate } from '../middleware/authMiddleware';
+
 export default({ config, db }) => {
   let api = Router();
 
@@ -11,7 +13,7 @@ export default({ config, db }) => {
 
 
   // 'v1/foodtruck/add'
-  api.post('/add', (req, res) => {
+  api.post('/add', authenticate, (req, res) => {      // use the authenticate to lock it down by requiring the token
     let newFoodTruck = new FoodTruck();   //createServer a new reataurant object from the 'Retaurant' class
     newFoodTruck.name = req.body.name;
     newFoodTruck.foodtype = req.body.foodtype;
@@ -47,7 +49,7 @@ export default({ config, db }) => {
   });
 
   // '/v1/foodtruck/:id' - Update
-  api.put('/:id', (req, res) => {
+  api.put('/:id', authenticate, (req, res) => {        // use the authenticate to lock it down by requiring the token
     FoodTruck.findById(req.params.id, (err, foodtruck) => {
       if (err) {
         res.send(err);
@@ -67,7 +69,7 @@ export default({ config, db }) => {
   });
 
   //'/v1/foodtruck/:id' - Delete
-  api.delete('/:id', (req, res) => {
+  api.delete('/:id', authenticate, (req, res) => {       // use the authenticate to lock it down by requiring the token
     FoodTruck.remove({
       _id: req.params.id
     }, (err, foodtruck) => {
@@ -87,7 +89,7 @@ export default({ config, db }) => {
 
   //add review for specific foodtruck id
   // '/v1/foodtruck/review/add/:id'
-  api.post('/reviews/add/:id', (req, res) => {
+  api.post('/reviews/add/:id', authenticate, (req, res) => {    // use the authenticate to lock it down by requiring the token
     FoodTruck.findById(req.params.id, (err, foodtruck) => {
       if (err) {
         res.send(err);
